@@ -1,10 +1,23 @@
+<!-- app/views/groups/settings.html.erb -->
 <h1>Group Settings</h1>
 
 <p>Group Name: <%= @group.name %></p>
 <p>Description: <%= @group.description %></p>
 
 <div>
-  <h2>Actions</h2>
-  <%= link_to "Start Distribution", start_distribution_group_path(@group), class: "btn btn-success" %>
-  <%= link_to "Invite Members", new_invitation_link_path(@group), class: "btn btn-primary" %>
+    <h2>Actions</h2>
+    <% if @group.distribution_started? %>
+        <p class="text-success">Distribution has been completed!</p>
+    <% else %>
+        <% if @group.group_members.count < 3 %>
+            <p class="text-warning">Need at least 3 participants to start Secret Santa!</p>
+        <% else %>
+            <%= button_to "Start Distribution", 
+                         start_distribution_group_path(@group), 
+                         method: :post,
+                         class: "btn btn-primary",
+                         data: { confirm: "Are you sure? This cannot be undone!" } %>
+        <% end %>
+    <% end %>
+    <%= link_to "Edit Group", edit_group_path(@group), class: "btn btn-secondary" %>
 </div>

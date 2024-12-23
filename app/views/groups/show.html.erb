@@ -3,3 +3,18 @@
 <p>Owner: <%= @group.owner.name %></p>
 <p>Invitation Code: <%= @group.invitation_code %></p>
 <%= link_to 'Settings', group_settings_path(@group) %>
+
+<h2>Members</h2>
+<ul>
+  <% @group.group_members.each do |member| %>
+    <li><%= link_to member.user.name, user_path(member.user) %></li> 
+  <% end %>
+</ul>
+
+<% if @group.distribution_started? && current_user %>
+    <% recipient = User.find(@group.group_members.find_by(user_id: current_user.id).recipient_id) %>
+    <div class="mt-4">
+        <h2>Your Secret Santa Assignment</h2>
+        <p>You are Secret Santa for: <%= recipient.name %></p>
+    </div>
+<% end %>

@@ -7,12 +7,36 @@ class Group < ApplicationRecord
 
   belongs_to :owner, class_name: "User", foreign_key: :owner_id
 
-  # Указываем явно класс GroupMember
   has_many :group_members, class_name: "GroupMember", dependent: :destroy
   has_many :users, through: :group_members
 
   has_many :wishlist_items, dependent: :destroy
-  has_many :invitation_links, dependent: :destroy
+
+  def distribute_santas
+    return false if distribution_started?
+    return false if group_members.count < 3
+
+    members = group_members.to_a
+    receivers = members.shuffle
+
+    while members.zip(receivers).any? { |giver, receiver| giver == receiver }
+      receivers.shuffle!
+    end
+
+    # todo обернуть в транзакцию
+
+    members.zip(receivers).each do |giver, receiver|
+      giver.update(recipient_id: receiver.user_id)
+    end
+
+    update(distribution_started: true)
+
+    # end
+    true
+  rescue => e
+    Rails.logger.error "Distribution error: #{e.message}"
+    false
+  end
 
   private
 

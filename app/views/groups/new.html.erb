@@ -21,25 +21,15 @@
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.label :owner_id, "Owner ID" %>
-    <%= form.text_field :owner_id %> <!-- Это поле можно установить через текущего пользователя, если он залогинен -->
-  </div>
+  <%= form.hidden_field :owner_id, value: current_user.id %>
 
   <div>
     <%= form.label :invitation_code, "Invitation Code" %>
     <%= form.text_field :invitation_code %>
   </div>
 
-  <div>
-    <%= form.check_box :is_active %>
-    <%= form.label :is_active, "Active?" %>
-  </div>
-
-  <div>
-    <%= form.check_box :distribution_started %>
-    <%= form.label :distribution_started, "Distribution Started?" %>
-  </div>
+  <%= form.hidden_field :is_active, value: true %>
+  <%= form.hidden_field :distribution_started, value: false %>
 
   <div>
     <%= form.submit "Create Group" %>

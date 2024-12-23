@@ -1,3 +1,15 @@
+<% if flash[:notice] %>
+    <script>
+      alert("<%= j flash[:notice] %>");
+    </script>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <script>
+      alert("<%= j flash[:alert] %>");
+    </script>
+  <% end %>
+
 <h1>Welcome to Secret Santa</h1>
 
 <% if current_user %>

@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [ :edit, :update, :show ]
+  before_action :authorize_user, only: [ :edit, :update ]
+
   def new
     @user = User.new
   end
@@ -33,5 +36,20 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name)
+  end
+
+  def authorize_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
+  end
+
+  def require_login
+    unless current_user
+      flash[:alert] = "Please log in to continue."
+      redirect_to login_path
+    end
   end
 end

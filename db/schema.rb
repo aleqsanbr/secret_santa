@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_23_202155) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_23_205049) do
   create_table "group_members", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -32,16 +32,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_202155) do
     t.datetime "updated_at", null: false
     t.index ["invitation_code"], name: "index_groups_on_invitation_code"
     t.index ["owner_id"], name: "index_groups_on_owner_id"
-  end
-
-  create_table "invitation_links", force: :cascade do |t|
-    t.string "group_id", null: false
-    t.string "code", null: false
-    t.datetime "expires_at"
-    t.string "created_by", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_invitation_links_on_code", unique: true
   end
 
   create_table "users", force: :cascade do |t|
