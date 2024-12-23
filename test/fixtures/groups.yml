@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  owner_id: MyString
+  invitation_code: MyString
+  is_active: false
+  distribution_started: false
+
+two:
+  name: MyString
+  description: MyString
+  owner_id: MyString
+  invitation_code: MyString
+  is_active: false
+  distribution_started: false

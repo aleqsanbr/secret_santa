@@ -1,0 +1,10 @@
+<h1>Group Settings</h1>
+
+<p>Group Name: <%= @group.name %></p>
+<p>Description: <%= @group.description %></p>
+
+<div>
+  <h2>Actions</h2>
+  <%= link_to "Start Distribution", start_distribution_group_path(@group), class: "btn btn-success" %>
+  <%= link_to "Invite Members", new_invitation_link_path(@group), class: "btn btn-primary" %>
+</div>

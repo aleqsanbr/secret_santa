@@ -1,0 +1,5 @@
+<h1><%= @group.name %></h1>
+<p><%= @group.description %></p>
+<p>Owner: <%= @group.owner.name %></p>
+<p>Invitation Code: <%= @group.invitation_code %></p>
+<%= link_to 'Settings', group_settings_path(@group) %>

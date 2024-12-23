@@ -1,0 +1,11 @@
+<h1>Join a Group</h1>
+
+<%= form_with url: join_group_path, local: true do |form| %>
+<div>
+    <%= form.label :invitation_code, "Invitation Code" %>
+    <%= form.text_field :invitation_code %>
+</div>
+<div>
+    <%= form.submit "Join Group", class: "btn btn-primary" %>
+</div>
+<% end %>

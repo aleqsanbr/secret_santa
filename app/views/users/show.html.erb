@@ -1,0 +1,16 @@
+<h1><%= @user.name %>'s Profile</h1>
+
+<p>Email: <%= @user.email %></p>
+<%= link_to "Edit Profile", edit_user_path(@user) %>
+
+<h2>Wishlist</h2>
+<ul>
+    <% @user.wishlist_items.each do |item| %>
+    <li>
+        <strong><%= item.title %></strong>: <%= item.description %>
+        <% if item.url.present? %>
+        (<%= link_to "Link", item.url, target: "_blank" %>)
+        <% end %>
+    </li>
+    <% end %>
+</ul>

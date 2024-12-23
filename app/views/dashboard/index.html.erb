@@ -1,0 +1,21 @@
+<h1>Your Dashboard, <%= current_user.name %> | <%= link_to "Main page", root_path %></h1>
+
+<% if current_user.groups.any? %>
+  <h2>Your Groups</h2>
+  <ul>
+    <% current_user.groups.each do |group| %>
+      <li>
+        <%= link_to group.name, group_path(group) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You are not part of any group yet.
+  
+  <%= link_to "Join a group", join_group_path %>
+  
+  or
+  
+  <%= link_to "Create a group", new_group_path %> 
+  </p>
+<% end %>

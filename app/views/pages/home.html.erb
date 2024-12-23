@@ -1,0 +1,14 @@
+<h1>Welcome to Secret Santa</h1>
+
+<% if current_user %>
+  <h2>Welcome, <%= current_user.name %>!</h2>
+  <%= link_to "Go to Dashboard", dashboard_path %>
+  <%= link_to "Log out", logout_path, method: :get %>
+  <%= link_to "Show profile", user_path(current_user.id) %>
+<% else %>
+  <p>Join the holiday fun and exchange gifts with your friends!</p>
+  <div>
+    <%= link_to "Log in", login_path %>
+    <%= link_to "Sign up", new_user_path %>
+  </div>
+<% end %>
